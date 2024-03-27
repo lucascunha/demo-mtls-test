@@ -1,3 +1,8 @@
+#Folder structure
+nginx
+└───certs
+    └───clients
+
 ## Generates self-signed server certificate
 openssl genpkey -algorithm RSA -out nginx/certs/localhost.key
 openssl req -new -key nginx/certs/localhost.key -out nginx/certs/localhost.csr -config template.csr.conf
