@@ -3,12 +3,19 @@ nginx
 └───certs
     └───clients
 
+## First of all
+Make sure you are positioned in the folder server/
+
+Create the subfolders 'certs' and 'clients'
+
+`mkdir -p nginx/certs/clients`
+
 ## Generates self-signed server certificate
 openssl genpkey -algorithm RSA -out nginx/certs/localhost.key
 openssl req -new -key nginx/certs/localhost.key -out nginx/certs/localhost.csr -config template.csr.conf
-openssl x509 -req -days 365 -in certs/localhost.csr -signkey certs/localhost.key -out  certs/localhost.crt
+openssl x509 -req -days 365 -in nginx/certs/localhost.csr -signkey nginx/certs/localhost.key -out nginx/certs/localhost.crt
 
 ## Generates self-signed client certificate
-openssl genpkey -algorithm RSA -out certs/clients/client.key
-openssl req -new -key certs/clients/client.key -out certs/clients/client.csr -config template.csr.conf
-openssl x509 -req -days 365 -in certs/clients/client.csr -signkey certs/clients/client.key -out  certs/clients/client.crt
+openssl genpkey -algorithm RSA -out nginx/certs/clients/client.key
+openssl req -new -key nginx/certs/clients/client.key -out nginx/certs/clients/client.csr -config template.csr.conf
+openssl x509 -req -days 365 -in nginx/certs/clients/client.csr -signkey nginx/certs/clients/client.key -out nginx/certs/clients/client.crt
