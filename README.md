@@ -12,7 +12,28 @@ First, you need to create your own private certificate authority and client cert
 
 ### Steps
 1) Creating certificates
-    - I made some adjustments to the commands, but basically everything is already in the original project file [here](https://github.com/lucascunha/demo-mtls-test/blob/master/server/Read.me).
+    - I made some adjustments to the commands, but basically everything is already in the original project file.
+
+    - Make sure you are positioned in the folder server/
+
+    - Create the subfolders 'certs' and 'clients'
+    ```
+        mkdir -p nginx/certs/clients
+    ```
+
+    - Generates self-signed server certificate
+    ```
+        openssl genpkey -algorithm RSA -out nginx/certs/localhost.key
+        openssl req -new -key nginx/certs/localhost.key -out nginx/certs/localhost.csr -config template.csr.conf
+        openssl x509 -req -days 365 -in nginx/certs/localhost.csr -signkey nginx/certs/localhost.key -out nginx/certs/localhost.crt
+    ```
+
+## Generates self-signed client certificate
+    ```
+        openssl genpkey -algorithm RSA -out nginx/certs/clients/client.key
+        openssl req -new -key nginx/certs/clients/client.key -out nginx/certs/clients/client.csr -config template.csr.conf
+        openssl x509 -req -days 365 -in nginx/certs/clients/client.csr -signkey nginx/certs/clients/client.key -out nginx/certs/clients/client.crt
+    ```
 
 2) Run the server
     - Run the following command in the server folder:
