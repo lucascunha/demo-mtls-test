@@ -28,7 +28,7 @@ First, you need to create your own private certificate authority and client cert
         openssl x509 -req -days 365 -in nginx/certs/localhost.csr -signkey nginx/certs/localhost.key -out nginx/certs/localhost.crt
     ```
 
-## Generates self-signed client certificate
+    - Generates self-signed client certificate
     ```
         openssl genpkey -algorithm RSA -out nginx/certs/clients/client.key
         openssl req -new -key nginx/certs/clients/client.key -out nginx/certs/clients/client.csr -config template.csr.conf
